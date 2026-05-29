@@ -42,3 +42,15 @@ categories:
     - {q: "OLLAMA_BASE_URL http://localhost:11434", kind: code, max: 30, qualifiers: {extension: "env"}}
     - {q: "MODEL=dolphin",                    kind: code,  max: 30, qualifiers: {filename: ".env.example"}}
     - {q: "OPENAI_API_KEY ollama dummy",      kind: code,  max: 30, qualifiers: {extension: "env"}}
+
+  public_apis:
+    - {q: "public api list no auth",          kind: repos, max: 60}
+    - {q: "free api endpoints open source",   kind: repos, max: 60}
+    - {q: "awesome free apis",                kind: repos, max: 50}
+    - {q: "no api key required rest",         kind: repos, max: 50}
+    - {q: "open api swagger free",            kind: repos, max: 40}
+    - {q: "public api collection json",       kind: code,  max: 40, qualifiers: {extension: "json"}}
+    - {q: "free tier api base url",           kind: code,  max: 30, qualifiers: {extension: "env"}}
+    - {q: "apiKey: false cors: true",         kind: code,  max: 40, qualifiers: {extension: "json"}}
+    - {q: "public rest api weather news",     kind: repos, max: 30}
+    - {q: "no authentication api endpoints",  kind: repos, max: 30}
