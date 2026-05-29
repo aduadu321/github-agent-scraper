@@ -1,0 +1,19 @@
+# Output & scraped data
+output/
+downloads/
+logs/
+found_agents/
+
+# Credentials & secrets
+*.env
+config/absevzgnkw.yaml
+config/emnlhfrixv.yaml
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Temp
+*.tmp
+*.log

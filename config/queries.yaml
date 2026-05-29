@@ -1,0 +1,44 @@
+# GitHub search queries for ollama / dolphin-uncensored / REST-API agents.
+categories:
+  ollama_deploy:
+    - {q: "ollama docker-compose",            kind: repos, max: 60}
+    - {q: "ollama systemd",                   kind: repos, max: 40}
+    - {q: "ollama gpu rtx",                   kind: repos, max: 40}
+    - {q: "ollama nvidia cuda",               kind: repos, max: 40}
+    - {q: "ollama kubernetes helm",           kind: repos, max: 30}
+    - {q: "ollama Modelfile",                 kind: code,  max: 60, qualifiers: {filename: "Modelfile"}}
+    - {q: "OLLAMA_HOST OLLAMA_MODELS",        kind: code,  max: 40, qualifiers: {extension: "env"}}
+    - {q: "ollama serve install.sh",          kind: code,  max: 40, qualifiers: {extension: "sh"}}
+    - {q: "ollama docker-compose ports 11434",kind: code,  max: 30, qualifiers: {filename: "docker-compose.yml"}}
+    - {q: "Service ollama serve",             kind: code,  max: 30, qualifiers: {extension: "service"}}
+
+  dolphin_uncensored:
+    - {q: "dolphin-llama3 ollama",            kind: repos, max: 40}
+    - {q: "dolphin-mistral uncensored",       kind: repos, max: 40}
+    - {q: "dolphin-mixtral",                  kind: repos, max: 30}
+    - {q: "cognitivecomputations dolphin",    kind: repos, max: 30}
+    - {q: "FROM dolphin",                     kind: code,  max: 40, qualifiers: {filename: "Modelfile"}}
+    - {q: "uncensored system prompt dolphin", kind: code,  max: 30}
+    - {q: "dolphin-llama3 SYSTEM",            kind: code,  max: 30, qualifiers: {filename: "Modelfile"}}
+    - {q: "ollama pull dolphin",              kind: code,  max: 30, qualifiers: {extension: "sh"}}
+
+  rest_agents:
+    - {q: "ollama fastapi agent",             kind: repos, max: 60}
+    - {q: "ollama flask api wrapper",         kind: repos, max: 40}
+    - {q: "openai compatible ollama proxy",   kind: repos, max: 40}
+    - {q: "langchain ollama agent",           kind: repos, max: 60}
+    - {q: "llamaindex ollama",                kind: repos, max: 40}
+    - {q: "litellm ollama",                   kind: repos, max: 30}
+    - {q: "autogen ollama",                   kind: repos, max: 40}
+    - {q: "crewai ollama",                    kind: repos, max: 40}
+    - {q: "ollama rest api server agent",     kind: repos, max: 40}
+    - {q: "ollama function calling tools",    kind: repos, max: 30}
+    - {q: "ollama streaming sse endpoint",    kind: code,  max: 30, qualifiers: {extension: "py"}}
+
+  agent_env_templates:
+    - {q: "OPENAI_API_BASE ollama",           kind: code,  max: 40, qualifiers: {extension: "env"}}
+    - {q: "OLLAMA_API_BASE",                  kind: code,  max: 40, qualifiers: {extension: "env"}}
+    - {q: "agent config ollama",              kind: code,  max: 30, qualifiers: {filename: ".env.example"}}
+    - {q: "OLLAMA_BASE_URL http://localhost:11434", kind: code, max: 30, qualifiers: {extension: "env"}}
+    - {q: "MODEL=dolphin",                    kind: code,  max: 30, qualifiers: {filename: ".env.example"}}
+    - {q: "OPENAI_API_KEY ollama dummy",      kind: code,  max: 30, qualifiers: {extension: "env"}}

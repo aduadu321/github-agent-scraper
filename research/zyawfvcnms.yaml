@@ -1,0 +1,249 @@
+# New dork queries — sourced from forum/community research 2026-05-26
+# Schema matches config/queries.yaml: {q, kind, max, qualifiers, category, description}
+# All dorks verified NOT in existing queries.yaml as of research date.
+# Add to queries.yaml by category or merge into new categories.
+
+categories:
+
+  # ── PRIVATE KEYS & SSH ────────────────────────────────────────────────────
+  hunt_private_keys:
+    - {q: "extension:pem private",                      kind: code, max: 50, qualifiers: {}, category: hunt_private_keys, description: "PEM files with 'private' keyword"}
+    - {q: "extension:ppk private",                      kind: code, max: 50, qualifiers: {}, category: hunt_private_keys, description: "PuTTY private key files"}
+    - {q: "filename:id_rsa",                            kind: code, max: 50, qualifiers: {}, category: hunt_private_keys, description: "RSA private key files by name"}
+    - {q: "filename:id_dsa",                            kind: code, max: 40, qualifiers: {}, category: hunt_private_keys, description: "DSA private key files by name"}
+    - {q: "filename:id_ed25519",                        kind: code, max: 40, qualifiers: {}, category: hunt_private_keys, description: "Ed25519 SSH key files"}
+    - {q: "\"-----BEGIN RSA PRIVATE KEY-----\"",        kind: code, max: 50, qualifiers: {}, category: hunt_private_keys, description: "RSA private key header string"}
+    - {q: "\"-----BEGIN OPENSSH PRIVATE KEY-----\"",    kind: code, max: 50, qualifiers: {}, category: hunt_private_keys, description: "OpenSSH private key header"}
+    - {q: "\"-----BEGIN EC PRIVATE KEY-----\"",         kind: code, max: 40, qualifiers: {}, category: hunt_private_keys, description: "EC private key header"}
+    - {q: "\"-----BEGIN DSA PRIVATE KEY-----\"",        kind: code, max: 30, qualifiers: {}, category: hunt_private_keys, description: "DSA private key header"}
+    - {q: "\"-----BEGIN PGP PRIVATE KEY BLOCK-----\"",  kind: code, max: 30, qualifiers: {}, category: hunt_private_keys, description: "PGP private key block header"}
+
+  # ── SSH / FTP CONFIG FILES ────────────────────────────────────────────────
+  hunt_ssh_config:
+    - {q: "filename:sshd_config",                       kind: code, max: 40, qualifiers: {}, category: hunt_ssh_config, description: "SSH daemon config files"}
+    - {q: "filename:known_hosts",                       kind: code, max: 30, qualifiers: {}, category: hunt_ssh_config, description: "SSH known_hosts files with hostnames/keys"}
+    - {q: "filename:config in:path .ssh",               kind: code, max: 40, qualifiers: {}, category: hunt_ssh_config, description: "SSH client config files"}
+    - {q: "filename:.ftpconfig",                        kind: code, max: 30, qualifiers: {}, category: hunt_ssh_config, description: "FTP config files with credentials"}
+    - {q: "filename:.remote-sync.json",                 kind: code, max: 30, qualifiers: {}, category: hunt_ssh_config, description: "Remote sync config with FTP/SSH creds"}
+    - {q: "filename:sftp-config.json",                  kind: code, max: 40, qualifiers: {}, category: hunt_ssh_config, description: "SFTP config files"}
+    - {q: "filename:sftp.json path:.vscode",            kind: code, max: 30, qualifiers: {}, category: hunt_ssh_config, description: "VSCode SFTP extension configs with creds"}
+    - {q: "filename:filezilla.xml Pass",                kind: code, max: 40, qualifiers: {}, category: hunt_ssh_config, description: "FileZilla saved server configs with passwords"}
+    - {q: "filename:recentservers.xml Pass",            kind: code, max: 30, qualifiers: {}, category: hunt_ssh_config, description: "FileZilla recent servers with passwords"}
+
+  # ── CREDENTIAL STORE FILES ────────────────────────────────────────────────
+  hunt_cred_stores:
+    - {q: "filename:.npmrc _auth",                      kind: code, max: 50, qualifiers: {}, category: hunt_cred_stores, description: ".npmrc files with _auth base64 token"}
+    - {q: "filename:.dockercfg auth",                   kind: code, max: 40, qualifiers: {}, category: hunt_cred_stores, description: "Legacy Docker auth config"}
+    - {q: "filename:.git-credentials",                  kind: code, max: 50, qualifiers: {}, category: hunt_cred_stores, description: "Git credential helper stored plaintext creds"}
+    - {q: "filename:.netrc password",                   kind: code, max: 50, qualifiers: {}, category: hunt_cred_stores, description: ".netrc files with passwords"}
+    - {q: "filename:_netrc password",                   kind: code, max: 40, qualifiers: {}, category: hunt_cred_stores, description: "Windows _netrc with passwords"}
+    - {q: "filename:.pgpass",                           kind: code, max: 40, qualifiers: {}, category: hunt_cred_stores, description: "PostgreSQL password file"}
+    - {q: "filename:.htpasswd",                         kind: code, max: 40, qualifiers: {}, category: hunt_cred_stores, description: "Apache .htpasswd credential files"}
+    - {q: "filename:.s3cfg",                            kind: code, max: 40, qualifiers: {}, category: hunt_cred_stores, description: "s3cmd config with AWS credentials"}
+    - {q: "filename:robomongo.json",                    kind: code, max: 30, qualifiers: {}, category: hunt_cred_stores, description: "Robo 3T MongoDB GUI saved connections"}
+    - {q: "filename:dbeaver-data-sources.xml",          kind: code, max: 30, qualifiers: {}, category: hunt_cred_stores, description: "DBeaver database connections with passwords"}
+    - {q: "filename:logins.json",                       kind: code, max: 30, qualifiers: {}, category: hunt_cred_stores, description: "Firefox logins.json saved credentials"}
+    - {q: "filename:hub oauth_token",                   kind: code, max: 30, qualifiers: {}, category: hunt_cred_stores, description: "GitHub hub CLI oauth token"}
+    - {q: "filename:config.json auths",                 kind: code, max: 30, qualifiers: {}, category: hunt_cred_stores, description: "Docker config.json with registry auths"}
+    - {q: "filename:idea14.key",                        kind: code, max: 20, qualifiers: {}, category: hunt_cred_stores, description: "JetBrains IDE license key files"}
+
+  # ── SHELL HISTORY & PROFILE FILES ────────────────────────────────────────
+  hunt_shell_history:
+    - {q: "filename:.bash_history",                     kind: code, max: 50, qualifiers: {}, category: hunt_shell_history, description: "Bash history with commands containing secrets"}
+    - {q: "filename:.sh_history",                       kind: code, max: 40, qualifiers: {}, category: hunt_shell_history, description: "sh history file"}
+    - {q: "filename:.bash_profile aws",                 kind: code, max: 40, qualifiers: {}, category: hunt_shell_history, description: "Bash profile with AWS credential exports"}
+    - {q: "filename:.bashrc password",                  kind: code, max: 40, qualifiers: {}, category: hunt_shell_history, description: "Bashrc with hardcoded passwords"}
+    - {q: "filename:.bashrc mailchimp",                 kind: code, max: 20, qualifiers: {}, category: hunt_shell_history, description: "Bashrc with Mailchimp API key"}
+    - {q: "filename:.cshrc",                            kind: code, max: 20, qualifiers: {}, category: hunt_shell_history, description: "csh/tcsh rc files"}
+    - {q: "filename:.history",                          kind: code, max: 30, qualifiers: {}, category: hunt_shell_history, description: "Generic .history files"}
+
+  # ── DATABASE / INFRASTRUCTURE ─────────────────────────────────────────────
+  hunt_database:
+    - {q: "extension:sql mysql dump password",          kind: code, max: 50, qualifiers: {}, category: hunt_database, description: "MySQL dump files with passwords"}
+    - {q: "rds.amazonaws.com password",                 kind: code, max: 40, qualifiers: {}, category: hunt_database, description: "RDS connection strings with passwords"}
+    - {q: "extension:json mongolab.com",                kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "JSON files with MongoLab connection strings"}
+    - {q: "extension:yaml mongolab.com",                kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "YAML files with MongoLab connection strings"}
+    - {q: "extension:json api.forecast.io",             kind: code, max: 20, qualifiers: {}, category: hunt_database, description: "Dark Sky API key in JSON"}
+    - {q: ".mlab.com password",                         kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "mLab MongoDB connection strings with passwords"}
+    - {q: "filename:connections.xml",                   kind: code, max: 40, qualifiers: {}, category: hunt_database, description: "XML database connection files"}
+    - {q: "filename:wp-config.php",                     kind: code, max: 50, qualifiers: {}, category: hunt_database, description: "WordPress config with DB credentials"}
+    - {q: "path:sites databases password",              kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Drupal/CMS database config with passwords"}
+    - {q: "filename:configuration.php JConfig password", kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Joomla configuration with DB password"}
+    - {q: "filename:config.php dbpasswd",               kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "PHP config files with DB password"}
+    - {q: "filename:database.yml production",           kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Rails database.yml with production creds"}
+    - {q: "filename:settings.py SECRET_KEY",            kind: code, max: 40, qualifiers: {filename: "settings.py"}, category: hunt_database, description: "Django SECRET_KEY in settings.py"}
+    - {q: "filename:secrets.yml password",              kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Rails secrets.yml with passwords"}
+    - {q: "filename:master.key path:config",            kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Rails master.key in config/"}
+    - {q: "filename:prod.secret.exs",                   kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Phoenix/Elixir production secrets"}
+    - {q: "filename:prod.exs NOT prod.secret.exs",      kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Phoenix prod config without secret file exclusion"}
+    - {q: "\"spring.datasource.password\" extension:properties", kind: code, max: 40, qualifiers: {}, category: hunt_database, description: "Spring Boot DB password in properties"}
+    - {q: "\"jdbc:mysql://\" \"password\" extension:java", kind: code, max: 30, qualifiers: {}, category: hunt_database, description: "Hardcoded MySQL connection in Java"}
+    - {q: "\"mongodb://\" \"password\"",                kind: code, max: 40, qualifiers: {}, category: hunt_database, description: "MongoDB connection URI with plaintext password"}
+    - {q: "\"postgresql://\" filename:.env",            kind: code, max: 40, qualifiers: {}, category: hunt_database, description: "PostgreSQL connection URL in .env"}
+
+  # ── CLOUD PROVIDER KEYS (NON-AWS) ─────────────────────────────────────────
+  hunt_cloud:
+    - {q: "HEROKU_API_KEY language:shell",              kind: code, max: 40, qualifiers: {}, category: hunt_cloud, description: "Heroku API key in shell scripts"}
+    - {q: "HEROKU_API_KEY language:json",               kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Heroku API key in JSON configs"}
+    - {q: "HOMEBREW_GITHUB_API_TOKEN language:shell",   kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Homebrew GitHub token in shell"}
+    - {q: "JEKYLL_GITHUB_TOKEN",                        kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Jekyll GitHub Pages deploy tokens"}
+    - {q: "netlify_api_key filename:.env",              kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Netlify API key in .env"}
+    - {q: "NETLIFY_AUTH_TOKEN extension:env",           kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Netlify auth token in env files"}
+    - {q: "VERCEL_TOKEN extension:env",                 kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Vercel deployment token in env files"}
+    - {q: "RAILWAY_TOKEN extension:env",                kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Railway.app token in env files"}
+    - {q: "DIGITALOCEAN_ACCESS_TOKEN extension:env",    kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "DigitalOcean access token"}
+    - {q: "LINODE_TOKEN extension:env",                 kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Linode API token"}
+    - {q: "cloudflare_api_key extension:env",           kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Cloudflare API key"}
+    - {q: "CLOUDFLARE_AUTH_KEY filename:.env",          kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Cloudflare auth key"}
+    - {q: "datadog_api_key language:shell",             kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Datadog API key in shell scripts"}
+    - {q: "DATADOG_APP_KEY extension:env",              kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Datadog app key"}
+    - {q: "b2_app_key extension:env",                   kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Backblaze B2 app key"}
+    - {q: "cloudinary_api_secret extension:env",        kind: code, max: 20, qualifiers: {}, category: hunt_cloud, description: "Cloudinary API secret"}
+    - {q: "firebase_api_key extension:json",            kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Firebase API key in JSON config"}
+    - {q: "FIREBASE_SERVICE_ACCOUNT extension:json",    kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Firebase service account JSON"}
+    - {q: "SUPABASE_SERVICE_KEY extension:env",         kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Supabase service role key (admin)"}
+    - {q: "SUPABASE_ANON_KEY filename:.env",            kind: code, max: 30, qualifiers: {}, category: hunt_cloud, description: "Supabase anon key"}
+
+  # ── AZURE ─────────────────────────────────────────────────────────────────
+  hunt_azure:
+    - {q: "AZURE_CLIENT_SECRET extension:env",          kind: code, max: 40, qualifiers: {}, category: hunt_azure, description: "Azure service principal client secret"}
+    - {q: "AZURE_STORAGE_CONNECTION_STRING filename:.env", kind: code, max: 40, qualifiers: {}, category: hunt_azure, description: "Azure Storage connection string"}
+    - {q: "DefaultEndpointsProtocol=https AccountName", kind: code, max: 30, qualifiers: {}, category: hunt_azure, description: "Azure storage connection string pattern"}
+    - {q: "AZURE_SUBSCRIPTION_ID AZURE_TENANT_ID extension:env", kind: code, max: 30, qualifiers: {}, category: hunt_azure, description: "Azure full credential set"}
+    - {q: "\"AzureWebJobsStorage\" extension:json",     kind: code, max: 30, qualifiers: {}, category: hunt_azure, description: "Azure Functions storage connection"}
+    - {q: "AZURE_OPENAI_API_KEY extension:env",         kind: code, max: 40, qualifiers: {}, category: hunt_azure, description: "Azure OpenAI API key"}
+
+  # ── SLACK / MESSAGING ─────────────────────────────────────────────────────
+  hunt_slack:
+    - {q: "xoxp OR xoxb",                              kind: code, max: 50, qualifiers: {}, category: hunt_slack, description: "Slack user/bot tokens (xoxp/xoxb prefix)"}
+    - {q: "\"https://hooks.slack.com/services/\"",      kind: code, max: 40, qualifiers: {}, category: hunt_slack, description: "Slack incoming webhook URLs"}
+    - {q: "slack_signing_secret extension:env",         kind: code, max: 30, qualifiers: {}, category: hunt_slack, description: "Slack app signing secret"}
+    - {q: "slack_webhook extension:env",                kind: code, max: 30, qualifiers: {}, category: hunt_slack, description: "Slack webhook URL in env"}
+    - {q: "DISCORD_TOKEN extension:env",                kind: code, max: 40, qualifiers: {}, category: hunt_slack, description: "Discord bot token"}
+    - {q: "DISCORD_WEBHOOK_URL extension:env",          kind: code, max: 30, qualifiers: {}, category: hunt_slack, description: "Discord webhook URL"}
+    - {q: "TELEGRAM_BOT_TOKEN extension:env",           kind: code, max: 40, qualifiers: {}, category: hunt_slack, description: "Telegram bot token"}
+    - {q: "\"api_hash\" \"api_id\"",                    kind: code, max: 30, qualifiers: {}, category: hunt_slack, description: "Telegram MTProto API hash+id pair"}
+
+  # ── PAYMENT SERVICES ─────────────────────────────────────────────────────
+  hunt_payments:
+    - {q: "\"sk_live_\" extension:js",                  kind: code, max: 50, qualifiers: {}, category: hunt_payments, description: "Stripe live secret key in JS"}
+    - {q: "\"sk_live_\" filename:.env",                 kind: code, max: 50, qualifiers: {}, category: hunt_payments, description: "Stripe live secret key in .env"}
+    - {q: "stripe_secret extension:env",                kind: code, max: 40, qualifiers: {}, category: hunt_payments, description: "Stripe secret in env files"}
+    - {q: "STRIPE_WEBHOOK_SECRET extension:env",        kind: code, max: 30, qualifiers: {}, category: hunt_payments, description: "Stripe webhook signing secret"}
+    - {q: "\"sq0atp-\" OR \"sq0csp-\"",                kind: code, max: 30, qualifiers: {}, category: hunt_payments, description: "Square OAuth access/consumer tokens"}
+    - {q: "paypal_client_secret extension:env",         kind: code, max: 30, qualifiers: {}, category: hunt_payments, description: "PayPal client secret"}
+    - {q: "braintree merchant_id extension:env",        kind: code, max: 20, qualifiers: {}, category: hunt_payments, description: "Braintree merchant credentials"}
+    - {q: "SHOPIFY_API_SECRET extension:env",           kind: code, max: 30, qualifiers: {}, category: hunt_payments, description: "Shopify private app API secret"}
+    - {q: "\"shpss_\" OR \"shpat_\" OR \"shpca_\"",    kind: code, max: 30, qualifiers: {}, category: hunt_payments, description: "Shopify token prefixes"}
+
+  # ── COMMUNICATIONS (TWILIO / SENDGRID / MAILGUN) ──────────────────────────
+  hunt_comms:
+    - {q: "TWILIO_ACCOUNT_SID extension:env",           kind: code, max: 40, qualifiers: {}, category: hunt_comms, description: "Twilio account SID in env"}
+    - {q: "TWILIO_AUTH_TOKEN extension:env",            kind: code, max: 40, qualifiers: {}, category: hunt_comms, description: "Twilio auth token in env"}
+    - {q: "TWILIO_SID NOT env",                         kind: code, max: 30, qualifiers: {}, category: hunt_comms, description: "Twilio SID outside of .env files"}
+    - {q: "twilio_api_key extension:env",               kind: code, max: 30, qualifiers: {}, category: hunt_comms, description: "Twilio API key"}
+    - {q: "SENDGRID_API_KEY extension:env",             kind: code, max: 40, qualifiers: {}, category: hunt_comms, description: "SendGrid API key in env"}
+    - {q: "\"SG.\" extension:env",                      kind: code, max: 40, qualifiers: {}, category: hunt_comms, description: "SendGrid key by SG. prefix"}
+    - {q: "MAILGUN_API_KEY extension:env",              kind: code, max: 30, qualifiers: {}, category: hunt_comms, description: "Mailgun API key"}
+    - {q: "mailgun_priv_key extension:env",             kind: code, max: 20, qualifiers: {}, category: hunt_comms, description: "Mailgun private key"}
+    - {q: "MAILCHIMP_API_KEY extension:env",            kind: code, max: 30, qualifiers: {}, category: hunt_comms, description: "Mailchimp API key"}
+    - {q: "POSTMARK_API_TOKEN extension:env",           kind: code, max: 20, qualifiers: {}, category: hunt_comms, description: "Postmark email service token"}
+    - {q: "RESEND_API_KEY extension:env",               kind: code, max: 20, qualifiers: {}, category: hunt_comms, description: "Resend.com API key"}
+
+  # ── JWT & AUTH TOKENS ─────────────────────────────────────────────────────
+  hunt_jwt:
+    - {q: "JWT_SECRET extension:env",                   kind: code, max: 40, qualifiers: {}, category: hunt_jwt, description: "JWT secret in env"}
+    - {q: "SECRET_KEY_BASE extension:env",              kind: code, max: 40, qualifiers: {}, category: hunt_jwt, description: "Rails/Phoenix secret_key_base"}
+    - {q: "\"Authorization: Bearer\" extension:js",     kind: code, max: 40, qualifiers: {}, category: hunt_jwt, description: "Hardcoded Bearer tokens in JS"}
+    - {q: "\"x-api-key\" filename:.config",             kind: code, max: 30, qualifiers: {}, category: hunt_jwt, description: "x-api-key header in config files"}
+    - {q: "jwt_secret_key extension:env",               kind: code, max: 30, qualifiers: {}, category: hunt_jwt, description: "JWT secret key variants"}
+    - {q: "APP_SECRET extension:env",                   kind: code, max: 30, qualifiers: {}, category: hunt_jwt, description: "Generic APP_SECRET env var"}
+
+  # ── GITHUB / CI-CD ────────────────────────────────────────────────────────
+  hunt_github_actions:
+    - {q: "GITHUB_TOKEN filename:.env.example",         kind: code, max: 30, qualifiers: {}, category: hunt_github_actions, description: "GitHub token in .env.example"}
+    - {q: "path:.github/workflows \"echo ${{ secrets.\"", kind: code, max: 40, qualifiers: {}, category: hunt_github_actions, description: "GitHub Actions workflows printing secrets to logs"}
+    - {q: "path:.github/workflows password language:yaml", kind: code, max: 40, qualifiers: {}, category: hunt_github_actions, description: "Password in GitHub Actions YAML"}
+    - {q: "path:.github/workflows \"env:\" language:yaml", kind: code, max: 50, qualifiers: {}, category: hunt_github_actions, description: "Env section in Actions workflows (may have hardcoded creds)"}
+    - {q: "CODECOV_TOKEN extension:env",                kind: code, max: 20, qualifiers: {}, category: hunt_github_actions, description: "Codecov upload token"}
+    - {q: "NPM_TOKEN extension:env",                    kind: code, max: 30, qualifiers: {}, category: hunt_github_actions, description: "NPM publish token"}
+    - {q: "DOCKER_PASSWORD extension:env",              kind: code, max: 30, qualifiers: {}, category: hunt_github_actions, description: "Docker Hub password in CI env"}
+    - {q: "NUGET_API_KEY extension:env",                kind: code, max: 20, qualifiers: {}, category: hunt_github_actions, description: "NuGet API key"}
+    - {q: "PYPI_API_TOKEN extension:env",               kind: code, max: 20, qualifiers: {}, category: hunt_github_actions, description: "PyPI upload token"}
+
+  # ── RECOVERY CODES (HIGH VALUE) ───────────────────────────────────────────
+  hunt_recovery_codes:
+    - {q: "filename:github-recovery-codes.txt",         kind: code, max: 30, qualifiers: {}, category: hunt_recovery_codes, description: "GitHub 2FA recovery codes"}
+    - {q: "filename:gitlab-recovery-codes.txt",         kind: code, max: 30, qualifiers: {}, category: hunt_recovery_codes, description: "GitLab 2FA recovery codes"}
+    - {q: "filename:discord_backup_codes.txt",          kind: code, max: 30, qualifiers: {}, category: hunt_recovery_codes, description: "Discord 2FA backup codes"}
+
+  # ── OTHER HIGH-VALUE PATTERNS ─────────────────────────────────────────────
+  hunt_misc_highvalue:
+    - {q: "shodan_api_key language:python",             kind: code, max: 30, qualifiers: {}, category: hunt_misc_highvalue, description: "Shodan API key in Python scripts"}
+    - {q: "shodan_api_key language:shell",              kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Shodan API key in shell scripts"}
+    - {q: "PT_TOKEN language:bash",                     kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "PivotalTracker token in bash"}
+    - {q: "SF_USERNAME salesforce",                     kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Salesforce username+password combos"}
+    - {q: "jsforce extension:js conn.login",            kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "JSForce Salesforce login in JS"}
+    - {q: "filename:jupyter_notebook_config.json",      kind: code, max: 30, qualifiers: {}, category: hunt_misc_highvalue, description: "Jupyter config with token/password"}
+    - {q: "filename:proftpdpasswd",                     kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "ProFTPD password files"}
+    - {q: "filename:ventrilo_srv.ini",                  kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Ventrilo server config with password"}
+    - {q: "filename:server.cfg rcon password",          kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Game server RCON passwords"}
+    - {q: "filename:CCCam.cfg",                         kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "CCCam satellite TV server config"}
+    - {q: "filename:express.conf path:.openshift",      kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "OpenShift Express config with creds"}
+    - {q: "msg nickserv identify filename:config",      kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "IRC NickServ passwords in config files"}
+    - {q: "extension:yaml cloud.redislabs.com",         kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Redis Cloud connection strings in YAML"}
+    - {q: "extension:json cloud.redislabs.com",         kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Redis Cloud connection strings in JSON"}
+    - {q: "filename:WebServers.xml",                    kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "IntelliJ/JetBrains web server configs"}
+    - {q: "filename:.esmtprc password",                 kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "esmtp config with SMTP password"}
+    - {q: "filename:deployment-config.json",            kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Generic deployment config with secrets"}
+    - {q: "[WFClient] Password= extension:ica",         kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "Citrix ICA files with embedded passwords"}
+    - {q: "filename:dhcpd.conf",                        kind: code, max: 20, qualifiers: {}, category: hunt_misc_highvalue, description: "DHCP server config with shared secrets"}
+    - {q: "filename:shadow path:etc",                   kind: code, max: 30, qualifiers: {}, category: hunt_misc_highvalue, description: "Unix shadow password file committed"}
+    - {q: "filename:passwd path:etc",                   kind: code, max: 30, qualifiers: {}, category: hunt_misc_highvalue, description: "Unix passwd file committed"}
+    - {q: "extension:json googleusercontent client_secret", kind: code, max: 30, qualifiers: {}, category: hunt_misc_highvalue, description: "Google OAuth2 client secret JSON"}
+    - {q: "extension:avastlic \"support.avast.com\"",   kind: code, max: 10, qualifiers: {}, category: hunt_misc_highvalue, description: "Avast license files"}
+
+  # ── WEB3 / CRYPTO ─────────────────────────────────────────────────────────
+  hunt_web3:
+    - {q: "\"privateKey\" extension:json",              kind: code, max: 40, qualifiers: {}, category: hunt_web3, description: "Private key in JSON (wallet)"}
+    - {q: "\"mnemonic\" extension:js",                  kind: code, max: 30, qualifiers: {}, category: hunt_web3, description: "Mnemonic seed phrase in JS"}
+    - {q: "ROPSTEN_PRIVATE_KEY extension:env",          kind: code, max: 20, qualifiers: {}, category: hunt_web3, description: "Ethereum Ropsten testnet private key"}
+    - {q: "RINKEBY_PRIVATE_KEY extension:env",          kind: code, max: 20, qualifiers: {}, category: hunt_web3, description: "Ethereum Rinkeby private key"}
+    - {q: "INFURA_PROJECT_SECRET extension:env",        kind: code, max: 30, qualifiers: {}, category: hunt_web3, description: "Infura Ethereum gateway secret"}
+    - {q: "ALCHEMY_API_KEY extension:env",              kind: code, max: 30, qualifiers: {}, category: hunt_web3, description: "Alchemy blockchain API key"}
+    - {q: "WALLET_PRIVATE_KEY extension:env",           kind: code, max: 30, qualifiers: {}, category: hunt_web3, description: "Generic wallet private key env var"}
+
+  # ── TEMPORAL DORKS (fresh secrets, reduced noise) ─────────────────────────
+  hunt_temporal:
+    - {q: "pushed:>2024-01-01 filename:.env \"password\"", kind: code, max: 50, qualifiers: {}, category: hunt_temporal, description: "Recently pushed .env files with passwords"}
+    - {q: "pushed:>2024-01-01 \"AKIA\" extension:env",  kind: code, max: 40, qualifiers: {}, category: hunt_temporal, description: "Fresh AWS key commits"}
+    - {q: "pushed:>2024-01-01 \"sk_live_\" extension:js", kind: code, max: 40, qualifiers: {}, category: hunt_temporal, description: "Fresh Stripe live keys in JS"}
+    - {q: "pushed:>2024-01-01 \"BEGIN RSA PRIVATE KEY\"", kind: code, max: 40, qualifiers: {}, category: hunt_temporal, description: "Freshly committed RSA keys"}
+    - {q: "pushed:>2024-06-01 OPENAI_API_KEY extension:env", kind: code, max: 40, qualifiers: {}, category: hunt_temporal, description: "Very fresh OpenAI key commits"}
+    - {q: "pushed:>2024-06-01 \"ghp_\" extension:env",  kind: code, max: 40, qualifiers: {}, category: hunt_temporal, description: "Very fresh GitHub PAT commits"}
+
+  # ── COMMIT SEARCH (different endpoint) ────────────────────────────────────
+  hunt_commits:
+    - {q: "\"accidentally committed\" password",        kind: commits, max: 30, qualifiers: {}, category: hunt_commits, description: "Commits mentioning accidental credential push"}
+    - {q: "\"remove api key\" OR \"delete api key\"",   kind: commits, max: 30, qualifiers: {}, category: hunt_commits, description: "Commits removing API keys (key visible in diff)"}
+    - {q: "\"forgot to remove\" secret",                kind: commits, max: 20, qualifiers: {}, category: hunt_commits, description: "Oops commits where secret was left in"}
+    - {q: "\"oops\" password",                          kind: commits, max: 20, qualifiers: {}, category: hunt_commits, description: "Oops commits with password keyword"}
+    - {q: "\"revert\" \"api key\"",                     kind: commits, max: 30, qualifiers: {}, category: hunt_commits, description: "Revert commits for API key removal (original still accessible)"}
+    - {q: "\"remove credentials\" OR \"remove secret\"", kind: commits, max: 30, qualifiers: {}, category: hunt_commits, description: "Remediation commits (secret in prior commit)"}
+
+  # ── ISSUE SEARCH (issue/PR bodies may contain secrets) ────────────────────
+  hunt_issues:
+    - {q: "\"api_key\" \"please help\" type:issue",     kind: issues, max: 30, qualifiers: {}, category: hunt_issues, description: "Issues where devs ask for help after leaking keys"}
+    - {q: "\"accidentally pushed\" secret type:issue",  kind: issues, max: 20, qualifiers: {}, category: hunt_issues, description: "Issues mentioning accidental secret push"}
+    - {q: "\"database password\" type:issue is:open",   kind: issues, max: 20, qualifiers: {}, category: hunt_issues, description: "Open issues with database password mentioned"}
+    - {q: "\"token\" \"leaked\" type:issue",            kind: issues, max: 20, qualifiers: {}, category: hunt_issues, description: "Issues about leaked tokens"}
+
+  # ── RAW.GITHUBUSERCONTENT.COM (Google dork — not GitHub API) ──────────────
+  # These are for use with Google/DuckDuckGo, not GitHub Code Search
+  hunt_raw_google_dorks:
+    - {q: "site:raw.githubusercontent.com filetype:env intext:api_key -intext:example -intext:sample", kind: google, max: 30, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: raw .env files with api_key"}
+    - {q: "site:raw.githubusercontent.com intext:AKIA filetype:cfg", kind: google, max: 20, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: AWS key in raw .cfg files"}
+    - {q: "site:raw.githubusercontent.com intext:\"sk-\" filetype:env -intext:example", kind: google, max: 20, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: OpenAI key in raw .env files"}
+    - {q: "site:raw.githubusercontent.com filetype:yaml intext:password intext:secret -intext:test", kind: google, max: 20, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: YAML files with password+secret"}
+    - {q: "site:gist.github.com intext:AKIA intext:aws_secret", kind: google, max: 20, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: AWS keys in public gists"}
+    - {q: "site:gist.github.com \"sk-\" -intext:example", kind: google, max: 20, qualifiers: {}, category: hunt_raw_google_dorks, description: "Google: OpenAI keys in gists"}
