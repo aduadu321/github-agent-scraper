@@ -43,6 +43,20 @@ categories:
     - {q: "MODEL=dolphin",                    kind: code,  max: 30, qualifiers: {filename: ".env.example"}}
     - {q: "OPENAI_API_KEY ollama dummy",      kind: code,  max: 30, qualifiers: {extension: "env"}}
 
+  crypto:
+    - {q: "bitcoin node docker-compose",      kind: repos, max: 50}
+    - {q: "bitcoin rpc api python",           kind: repos, max: 50}
+    - {q: "xmrig config mining pool",         kind: repos, max: 40}
+    - {q: "ethereum node web3 api",           kind: repos, max: 50}
+    - {q: "crypto mining pool stratum",       kind: repos, max: 40}
+    - {q: "bitcoin address generator python", kind: repos, max: 40}
+    - {q: "blockchain api free python",       kind: repos, max: 50}
+    - {q: "BITCOIN_RPC_USER BITCOIN_RPC_PASS",kind: code,  max: 40, qualifiers: {extension: "env"}}
+    - {q: "MINING_POOL_URL WALLET_ADDRESS",   kind: code,  max: 30, qualifiers: {extension: "env"}}
+    - {q: "web3 infura alchemy api key",      kind: code,  max: 40, qualifiers: {extension: "env"}}
+    - {q: "bitcoin testnet faucet api",       kind: repos, max: 30}
+    - {q: "coinbase binance api python bot",  kind: repos, max: 50}
+
   public_apis:
     - {q: "public api list no auth",          kind: repos, max: 60}
     - {q: "free api endpoints open source",   kind: repos, max: 60}
